@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import { Package, ShoppingBag, Plus, Eye, MessageCircle, History, TrendingUp } from "lucide-react"
 import { motion } from "framer-motion"
+import BASE_URL from "../config/api"
 
 const UserDashboard = ({ onNavigate }) => {
   const [myListings, setMyListings] = useState([]) // Initialize as empty array
@@ -20,7 +21,7 @@ const UserDashboard = ({ onNavigate }) => {
           return
         }
 
-        const res = await fetch("https://se-lab-deployment.onrender.com/api/users/info", {
+        const res = await fetch(`${BASE_URL}/api/users/info`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -51,7 +52,7 @@ const UserDashboard = ({ onNavigate }) => {
       const userId = localStorage.getItem("userId")
       if (!userId) throw new Error("No userId found in local storage")
 
-      const response = await fetch("https://se-lab-deployment.onrender.com/api/items/user", {
+      const response = await fetch(`${BASE_URL}/api/items/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

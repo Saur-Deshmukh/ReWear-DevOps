@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "./ui/button"
 import { Upload, X, Plus, ImageIcon } from "lucide-react"
 import { motion } from "framer-motion"
+import BASE_URL from "../config/api"
 
 const AddNewItemPage = ({ onNavigate }) => {
   const [formData, setFormData] = useState({
@@ -114,7 +115,7 @@ const AddNewItemPage = ({ onNavigate }) => {
       })
 
       // ✅ 6️⃣ Send to Flask backend
-      const response = await fetch("https://se-lab-deployment.onrender.com/api/items/add", {
+      const response = await fetch(`${BASE_URL}/api/items/add`, {
         method: "POST",
         body: data,
       })

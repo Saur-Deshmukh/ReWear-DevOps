@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "./ui/button"
 import { Heart, Package, Filter, X } from "lucide-react"
 import { motion } from "framer-motion"
+import BASE_URL from "../config/api"
 
 const BrowseItemsPage = ({ onNavigate }) => {
   const [allItems, setAllItems] = useState([])
@@ -13,7 +14,7 @@ const BrowseItemsPage = ({ onNavigate }) => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await fetch("https://se-lab-deployment.onrender.com/api/items/available")
+        const res = await fetch(`${BASE_URL}/api/items/available`)
         if (!res.ok) throw new Error("Failed to fetch items")
         const data = await res.json()
 

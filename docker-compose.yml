@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./Backend
+    container_name: rewear-backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./Backend/.env
+    volumes:
+      - ./Backend:/app
+    restart: always
+
+  frontend:
+    build: ./Frontend
+    container_name: rewear-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    env_file:
+      - ./Frontend/.env
+    restart: always

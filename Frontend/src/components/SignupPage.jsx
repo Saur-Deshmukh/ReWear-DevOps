@@ -7,6 +7,7 @@ import { Button } from "./ui/button"
 import { User, Mail, Lock, Chrome, UserPlus } from "lucide-react"
 import { useAuth } from "../contexts/AuthContext"
 import { motion } from "framer-motion"
+import BASE_URL from "../config/api"
 
 const SignupPage = ({ onNavigate }) => {
   // Changed prop name from onSwitchToLogin to onNavigate
@@ -60,7 +61,7 @@ const SignupPage = ({ onNavigate }) => {
       name: firebaseUser.displayName,
     }
 
-    const res = await fetch("https://se-lab-deployment.onrender.com/api/users/me", {
+    const res = await fetch(`${BASE_URL}/api/users/me`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

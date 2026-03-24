@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "./ui/button"
 import { Heart, Share2, Calendar, Package, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
+import BASE_URL from "../config/api"
 
 const ItemDetailPage = ({ itemId, onNavigate }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
@@ -20,7 +21,7 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
   useEffect(() => {
     const fetchItemDetails = async () => {
       try {
-        const res = await fetch(`https://se-lab-deployment.onrender.com/api/items/detail/${itemId}`)
+        const res = await fetch(`${BASE_URL}/api/items/detail/${itemId}`)
         if (!res.ok) throw new Error("Item not found")
         const data = await res.json()
         console.log(data)
@@ -49,14 +50,14 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
 
   try {
     const [userInfoRes, userItemsRes] = await Promise.all([
-       fetch("https://se-lab-deployment.onrender.com/api/users/info", {
+       fetch(`${BASE_URL}/api/users/info`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ uid }),
         }),
-      fetch("https://se-lab-deployment.onrender.com/api/items/user", {
+      fetch(`${BASE_URL}/api/items/user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uid: uid }),
@@ -470,7 +471,7 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
     }
 
     try {
-      const res = await fetch("https://se-lab-deployment.onrender.com/api/swap/request", {
+      const res = await fetch(`${BASE_URL}/api/swap/request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
