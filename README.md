@@ -40,10 +40,6 @@ ReWear solves this problem by allowing people to list, browse, and exchange clot
 ---
 
 ## 👥 Team Members
-* Saur Deshmukh (TL) – [saur90044@gmail.com](mailto:saur90044@gmail.com)
-* Atharva Deokar – [atharva.deokar2005@gmail.com](mailto:atharva.deokar2005@gmail.com)
+* Saur Deshmukh – 2023300045
+* Atharva Deokar – 2023300042
 
-* Aniket Atole – [ancodernova20@gmail.com](mailto:bhosalesoham5713@gmail.com)
-* Soham Bhosale – [bhosalesoham5713@gmail.com](mailto:bhosalesoham5713@gmail.com)
-
-.
