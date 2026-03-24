@@ -1,0 +1,8 @@
+myenv/
+.env
+Backend/firebase_admin_config.json
+Backend/db/__pycache__/
+__pycache__/
+Backend/__pycache__/
+Backend/routes/__pycache__/
+Backend/utils/__pycache__/
