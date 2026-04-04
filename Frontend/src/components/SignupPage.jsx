@@ -61,7 +61,7 @@ const SignupPage = ({ onNavigate }) => {
       name: firebaseUser.displayName,
     }
 
-    const res = await fetch(`${BASE_URL}/api/users/me`, {
+    const res = await fetch(`${BASE_URL}/users/me`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

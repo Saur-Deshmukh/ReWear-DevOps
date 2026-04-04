@@ -14,7 +14,7 @@ const BrowseItemsPage = ({ onNavigate }) => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await fetch(`${BASE_URL}/api/items/available`)
+        const res = await fetch(`${BASE_URL}/items/available`)
         if (!res.ok) throw new Error("Failed to fetch items")
         const data = await res.json()
 

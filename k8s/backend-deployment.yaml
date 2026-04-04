@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rewear-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rewear-backend
+  template:
+    metadata:
+      labels:
+        app: rewear-backend
+    spec:
+      containers:
+        - name: backend
+          image: saurdeshmukh/devops-lab-backend:latest
+          ports:
+            - containerPort: 5000
+
+          envFrom:
+            - secretRef:
+                name: rewear-backend-secret
+
+          volumeMounts:
+            - name: firebase-volume
+              mountPath: /app/firebase_admin_config.json
+              subPath: firebase_admin_config.json
+
+      volumes:
+        - name: firebase-volume
+          secret:
+            secretName: firebase-secret

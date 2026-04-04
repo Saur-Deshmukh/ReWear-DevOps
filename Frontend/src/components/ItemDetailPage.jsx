@@ -21,7 +21,7 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
   useEffect(() => {
     const fetchItemDetails = async () => {
       try {
-        const res = await fetch(`${BASE_URL}/api/items/detail/${itemId}`)
+        const res = await fetch(`${BASE_URL}/items/detail/${itemId}`)
         if (!res.ok) throw new Error("Item not found")
         const data = await res.json()
         console.log(data)
@@ -471,7 +471,7 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
     }
 
     try {
-      const res = await fetch(`${BASE_URL}/api/swap/request`, {
+      const res = await fetch(`${BASE_URL}/swap/request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

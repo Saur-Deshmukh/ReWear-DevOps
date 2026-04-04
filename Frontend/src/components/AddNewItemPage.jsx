@@ -115,7 +115,7 @@ const AddNewItemPage = ({ onNavigate }) => {
       })
 
       // ✅ 6️⃣ Send to Flask backend
-      const response = await fetch(`${BASE_URL}/api/items/add`, {
+      const response = await fetch(`${BASE_URL}/items/add`, {
         method: "POST",
         body: data,
       })

@@ -21,7 +21,7 @@ const UserDashboard = ({ onNavigate }) => {
           return
         }
 
-        const res = await fetch(`${BASE_URL}/api/users/info`, {
+        const res = await fetch(`${BASE_URL}/users/info`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const UserDashboard = ({ onNavigate }) => {
       const userId = localStorage.getItem("userId")
       if (!userId) throw new Error("No userId found in local storage")
 
-      const response = await fetch(`${BASE_URL}/api/items/user`, {
+      const response = await fetch(`${BASE_URL}/items/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

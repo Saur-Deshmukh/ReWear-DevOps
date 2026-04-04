@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rewear-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rewear-frontend
+  template:
+    metadata:
+      labels:
+        app: rewear-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: saurdeshmukh/devops-lab-frontend:latest
+          ports:
+            - containerPort: 80
