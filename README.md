@@ -25,7 +25,6 @@ ReWear solves this problem by allowing people to list, browse, and exchange clot
 * 📦 Browse available clothes with filters
 * 📅 Tracks upload date (month/year)
 
----
 
 ## 🏗 Tech Stack
 
