@@ -10,13 +10,10 @@ pipeline {
     stages {
 
         stage('SonarQube Analysis') {
-            tools {
-                sonarRunner 'sonar-scanner'
-            }
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh '''
-                    sonar-scanner \
+                    /var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner/bin/sonar-scanner \
                     -Dsonar.projectKey=rewear \
                     -Dsonar.sources=.
                     '''
