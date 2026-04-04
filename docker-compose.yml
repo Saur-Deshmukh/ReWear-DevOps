@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    build: ./Backend
+    image: saurdeshmukh/devops-lab-backend:latest   
     container_name: rewear-backend
     ports:
       - "5000:5000"
@@ -13,7 +13,7 @@ services:
     restart: always
 
   frontend:
-    build: ./Frontend
+    image: saurdeshmukh/devops-lab-frontend:latest   
     container_name: rewear-frontend
     ports:
       - "3000:80"
