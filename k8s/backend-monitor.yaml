@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rewear-backend-monitor
+  labels:
+    release: monitoring   # VERY IMPORTANT
+spec:
+  selector:
+    matchLabels:
+      app: rewear-backend
+  endpoints:
+    - port: http          # MUST match service port name
+      path: /metrics
+      interval: 15s

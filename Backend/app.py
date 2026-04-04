@@ -3,6 +3,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import firebase_admin
 from firebase_admin import credentials
+
 import os
 
 
@@ -17,11 +18,23 @@ from routes.user_routes import user_bp
 from routes.item_routes import item_bp  
 from routes.admin_routes import admin_bp
 from routes.swap import swap_bp
-
+from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 app = Flask(__name__)
 CORS(app)  
 
 init_collections()
+REQUEST_COUNT = Counter(
+    'rewear_requests_total',
+    'Total API Requests'
+)
+@app.before_request
+def before_request():
+    REQUEST_COUNT.inc()
+
+@app.route("/metrics")
+def metrics():
+    return generate_latest(), 200, {'Content-Type': CONTENT_TYPE_LATEST}
+
 
 app.register_blueprint(admin_bp, url_prefix="/api/admin")
 app.register_blueprint(user_bp, url_prefix="/api/users")
