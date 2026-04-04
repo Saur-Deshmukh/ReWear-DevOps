@@ -12,11 +12,12 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
-                    sh '''
-                    /var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner/bin/sonar-scanner \
-                    -Dsonar.projectKey=rewear \
-                    -Dsonar.sources=.
-                    '''
+                    script {
+                        def scannerHome = tool 'sonar-scanner' // matches the name you set in Tools
+                        sh "${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=rewear \
+                            -Dsonar.sources=."
+                    }
                 }
             }
         }
