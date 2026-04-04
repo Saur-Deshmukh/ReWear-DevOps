@@ -37,7 +37,7 @@ ReWear solves this problem by allowing people to list, browse, and exchange clot
 | Storage  | Firebase Storage / Cloudinary        |
 | Auth     | Firebase Authentication              |
 
-
+---
 ## 👥 Team Members
 * Saur Deshmukh – 2023300045
 * Atharva Deokar – 2023300042
