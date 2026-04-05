@@ -5,11 +5,11 @@ metadata:
   labels:
     app: rewear-backend   # ← IMPORTANT (used by ServiceMonitor)
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: rewear-backend
   ports:
     - name: http          # ✅ MUST ADD THIS
       port: 80
       targetPort: 5000
-      nodePort: 30007
+      # nodePort: 30007
