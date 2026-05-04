@@ -1,0 +1,8 @@
+prometheus:
+  prometheusSpec:
+    additionalScrapeConfigs:
+      - job_name: "rewear-backend"
+        metrics_path: /metrics
+        static_configs:
+          - targets:
+              - a6f33353794334b5e9b06fbea69bcdfb-1295404558.ap-south-1.elb.amazonaws.com
