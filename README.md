@@ -40,4 +40,4 @@ ReWear solves this problem by allowing people to list, browse, and exchange clot
 ## 👥 Team Members
 * Saur Deshmukh – 2023300045
 * Atharva Deokar – 2023300042
-
+---
