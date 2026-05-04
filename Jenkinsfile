@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     environment {
         DOCKERHUB_CREDS = credentials('dockerhub-creds')
         IMAGE_BACKEND = 'saurdeshmukh/devops-lab-backend'
@@ -9,11 +13,18 @@ pipeline {
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                deleteDir()
+                git url: 'https://github.com/Saur-Deshmukh/Devops-lab.git', branch: 'main'
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     script {
-                        def scannerHome = tool 'sonar-scanner' // matches the name you set in Tools
+                        def scannerHome = tool 'sonar-scanner'
                         sh "${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=rewear \
                             -Dsonar.sources=."
