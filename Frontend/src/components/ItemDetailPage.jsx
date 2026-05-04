@@ -50,14 +50,14 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
 
   try {
     const [userInfoRes, userItemsRes] = await Promise.all([
-       fetch(`${BASE_URL}/api/users/info`, {
+       fetch(`${BASE_URL}/users/info`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ uid }),
         }),
-      fetch(`${BASE_URL}/api/items/user`, {
+      fetch(`${BASE_URL}/items/user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uid: uid }),
