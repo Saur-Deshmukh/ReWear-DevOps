@@ -16,7 +16,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 deleteDir()
-                git url: 'https://github.com/Saur-Deshmukh/Devops-lab.git', branch: 'main'
+                git branch: 'main',
+                    credentialsId: 'saur-github',
+                    url: 'https://github.com/Saur-Deshmukh/Devops-lab.git'
             }
         }
 
