@@ -17,6 +17,7 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [userItems, setUserItems] = useState([]);
   const [selectedOfferedItemId, setSelectedOfferedItemId] = useState(null);
+  const [swapMode, setSwapMode] = useState("direct")
 
   useEffect(() => {
     const fetchItemDetails = async () => {
@@ -45,38 +46,38 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
   }, [itemId])
 
   const handleSwapRequest = async () => {
-  const uid = localStorage.getItem("userId")
-  if (!uid) return alert("You must be logged in")
+    const uid = localStorage.getItem("userId")
+    if (!uid) return alert("You must be logged in")
 
-  try {
-    const [userInfoRes, userItemsRes] = await Promise.all([
-       fetch(`${BASE_URL}/users/info`, {
+    try {
+      const [userInfoRes, userItemsRes] = await Promise.all([
+        fetch(`${BASE_URL}/users/info`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ uid }),
         }),
-      fetch(`${BASE_URL}/items/user`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ uid: uid }),
-      }),
-    ])
+        fetch(`${BASE_URL}/items/user`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ uid: uid }),
+        }),
+      ])
 
-    if (!userInfoRes.ok || !userItemsRes.ok) throw new Error("Failed to fetch user info or items")
+      if (!userInfoRes.ok || !userItemsRes.ok) throw new Error("Failed to fetch user info or items")
 
-    const userInfoData = await userInfoRes.json()
-    const userItemsData = await userItemsRes.json()
+      const userInfoData = await userInfoRes.json()
+      const userItemsData = await userItemsRes.json()
 
-    setUserInfo(userInfoData)
-    setUserItems(userItemsData)
-    setShowSwapModal(true)
-  } catch (error) {
-    console.error(error)
-    alert("Failed to load swap options.")
+      setUserInfo(userInfoData)
+      setUserItems(userItemsData)
+      setShowSwapModal(true)
+    } catch (error) {
+      console.error(error)
+      alert("Failed to load swap options.")
+    }
   }
-}
 
   const nextImage = () => {
     setSelectedImageIndex((prev) => (prev + 1) % (itemData?.images?.length || 1))
@@ -161,11 +162,10 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
                   whileHover={{ scale: 1.05 }}
-                  className={`relative rounded-lg overflow-hidden border-2 ${
-                    selectedImageIndex === index
-                      ? "border-emerald-600 dark:border-emerald-500"
-                      : "border-gray-200 hover:border-emerald-600/50 dark:border-gray-700 dark:hover:border-emerald-500/50"
-                  } transition-colors`}
+                  className={`relative rounded-lg overflow-hidden border-2 ${selectedImageIndex === index
+                    ? "border-emerald-600 dark:border-emerald-500"
+                    : "border-gray-200 hover:border-emerald-600/50 dark:border-gray-700 dark:hover:border-emerald-500/50"
+                    } transition-colors`}
                   aria-label={`View image ${index + 1}`}
                 >
                   <img
@@ -207,11 +207,10 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
                     {itemData.points} pts
                   </span>
                   <span
-                    className={`ml-3 px-3 py-1 rounded-full text-sm font-medium ${
-                      itemData.status === "available"
-                        ? "bg-emerald-600/20 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-200"
-                        : "bg-red-500/20 text-red-700 dark:text-red-300"
-                    }`}
+                    className={`ml-3 px-3 py-1 rounded-full text-sm font-medium ${itemData.status === "available"
+                      ? "bg-emerald-600/20 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-200"
+                      : "bg-red-500/20 text-red-700 dark:text-red-300"
+                      }`}
                   >
                     {itemData.status === "available" ? "Available" : "Unavailable"}
                   </span>
@@ -227,7 +226,7 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Swap Request
                 </Button>
-                
+
               </div>
             </motion.div>
 
@@ -387,14 +386,28 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
               </label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label className="border-2 border-emerald-600 rounded-lg p-4 bg-emerald-600/10 cursor-pointer flex items-start shadow-sm dark:border-emerald-500 dark:bg-emerald-500/10">
-                  <input type="radio" name="swapMode" value="direct" defaultChecked className="mr-3 mt-1" />
+                  <input
+                    type="radio"
+                    name="swapMode"
+                    value="direct"
+                    checked={swapMode === "direct"}
+                    onChange={() => setSwapMode("direct")}
+                    className="mr-3 mt-1"
+                  />
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-gray-50">Direct Item Swap</h4>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Exchange one of your items for this item</p>
                   </div>
                 </label>
                 <label className="border-2 border-gray-200 rounded-lg p-4 bg-gray-100 cursor-pointer flex items-start shadow-sm dark:border-gray-700 dark:bg-gray-700">
-                  <input type="radio" name="swapMode" value="points" className="mr-3 mt-1" />
+                  <input
+                    type="radio"
+                    name="swapMode"
+                    value="points"
+                    checked={swapMode === "points"}
+                    onChange={() => setSwapMode("points")}
+                    className="mr-3 mt-1"
+                  />
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-gray-50">Redeem with Points</h4>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -404,52 +417,51 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
                 </label>
               </div>
             </div>
+            {swapMode === "direct" && (
+              <div className="mb-6">
+                <h4 className="font-medium text-gray-900 mb-3 dark:text-gray-50">Select item to offer (Direct Swap):</h4>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-2 bg-gray-100 dark:border-gray-700 dark:bg-gray-700">
+                  {userItems.map((item) => (
+                    <label
+                      key={item._id}
+                      className={`border rounded-lg p-2 cursor-pointer flex flex-col items-center text-center shadow-sm ${selectedOfferedItemId === item._id
+                        ? "border-emerald-600 dark:border-emerald-500"
+                        : "border-gray-200 hover:border-emerald-600 dark:border-gray-700 dark:hover:border-emerald-500"
+                        } bg-white dark:bg-gray-800 transition`}
+                    >
+                      <input
+                        type="radio"
+                        name="offeredItem"
+                        value={item._id}
+                        className="sr-only"
+                        checked={selectedOfferedItemId === item._id}
+                        onChange={() => setSelectedOfferedItemId(item._id)}
+                      />
+                      <img
+                        src={item.images?.[0] || "/placeholder.svg"}
+                        alt={item.title}
+                        className="w-full h-20 object-cover rounded mb-2"
+                      />
+                      <p className="text-xs font-medium text-gray-900 truncate dark:text-gray-50">{item.title}</p>
+                      <p className="text-xs text-emerald-600 dark:text-emerald-500">{item.points} pts</p>
+                    </label>
+                  ))}
 
-            <div className="mb-6">
-              <h4 className="font-medium text-gray-900 mb-3 dark:text-gray-50">Select item to offer (Direct Swap):</h4>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-2 bg-gray-100 dark:border-gray-700 dark:bg-gray-700">
-                {userItems.map((item) => (
-  <label
-    key={item._id}
-    className={`border rounded-lg p-2 cursor-pointer flex flex-col items-center text-center shadow-sm ${
-      selectedOfferedItemId === item._id
-        ? "border-emerald-600 dark:border-emerald-500"
-        : "border-gray-200 hover:border-emerald-600 dark:border-gray-700 dark:hover:border-emerald-500"
-    } bg-white dark:bg-gray-800 transition`}
-  >
-    <input
-      type="radio"
-      name="offeredItem"
-      value={item._id}
-      className="sr-only"
-      checked={selectedOfferedItemId === item._id}
-      onChange={() => setSelectedOfferedItemId(item._id)}
-    />
-    <img
-      src={item.images?.[0] || "/placeholder.svg"}
-      alt={item.title}
-      className="w-full h-20 object-cover rounded mb-2"
-    />
-    <p className="text-xs font-medium text-gray-900 truncate dark:text-gray-50">{item.title}</p>
-    <p className="text-xs text-emerald-600 dark:text-emerald-500">{item.points} pts</p>
-  </label>
-))}
-
+                </div>
               </div>
-            </div>
+            )}
 
-            
 
             <div className="mb-6 p-3 bg-gray-100 rounded-lg border border-gray-200 shadow-inner dark:bg-gray-700 dark:border-gray-600">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500 dark:text-gray-400">Your current points balance:</span>
-                <span className="font-semibold text-emerald-600 dark:text-emerald-500">145 pts</span>
+                <span className="font-semibold text-emerald-600 dark:text-emerald-500">{userInfo.points}</span>
               </div>
               <div className="flex justify-between items-center mt-1">
                 <span className="text-sm text-gray-500 dark:text-gray-400">Cost of this item:</span>
                 <span className="font-semibold text-gray-900 dark:text-gray-50">{itemData.points} pts</span>
               </div>
-              
+
             </div>
 
             <div className="flex space-x-3">
@@ -461,43 +473,66 @@ const ItemDetailPage = ({ itemId, onNavigate }) => {
                 Cancel
               </Button>
               <Button
-  onClick={async () => {
-    const requesterUid = localStorage.getItem("userId")
-    const requestedItemId = itemData._id
-    const offeredItemId = selectedOfferedItemId
+                onClick={async () => {
+                  const requesterUid = localStorage.getItem("userId")
+                  const requestedItemId = itemData._id
 
-    if (!requesterUid || !requestedItemId || !offeredItemId) {
-      return alert("Please select your item to offer.")
-    }
+                  if (!requesterUid || !requestedItemId) {
+                    return alert("Invalid request")
+                  }
 
-    try {
-      const res = await fetch(`${BASE_URL}/swap/request`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          requesterUid,
-          requestedItemId,
-          offeredItemId,
-        }),
-      })
+                  try {
+                    let res, result
 
-      const result = await res.json()
-      if (res.ok) {
-        alert("Swap completed successfully!")
-        setShowSwapModal(false)
-      } else {
-        alert(result.error || "Swap failed.")
-      }
-    } catch (error) {
-      console.error(error)
-      alert("Error submitting swap request.")
-    }
-  }}
-  disabled={!selectedOfferedItemId}
-  className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white shadow-md dark:bg-emerald-500 dark:hover:bg-emerald-600"
->
-  Send Request
-</Button>
+                    if (swapMode === "points") {
+                      // 🔥 CALL REDEEM API
+                      res = await fetch(`${BASE_URL}/swap/redeem`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          uid: requesterUid,
+                          itemId: requestedItemId,
+                        }),
+                      })
+                    } else {
+                      // 🔥 DIRECT SWAP (existing logic)
+                      if (!selectedOfferedItemId) {
+                        return alert("Please select your item to offer.")
+                      }
+
+                      res = await fetch(`${BASE_URL}/swap/request`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          requesterUid,
+                          requestedItemId,
+                          offeredItemId: selectedOfferedItemId,
+                        }),
+                      })
+                    }
+
+                    result = await res.json()
+
+                    if (res.ok) {
+                      alert(
+                        swapMode === "points"
+                          ? "Item redeemed successfully!"
+                          : "Swap request sent successfully!"
+                      )
+                      setShowSwapModal(false)
+                    } else {
+                      alert(result.error || "Request failed.")
+                    }
+                  } catch (error) {
+                    console.error(error)
+                    alert("Something went wrong.")
+                  }
+                }}
+                disabled={swapMode === "direct" && !selectedOfferedItemId}
+                className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white shadow-md dark:bg-emerald-500 dark:hover:bg-emerald-600"
+              >
+                {swapMode === "points" ? "Redeem Item" : "Send Request"}
+              </Button>
 
             </div>
           </motion.div>

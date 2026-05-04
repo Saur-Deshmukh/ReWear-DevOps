@@ -42,11 +42,13 @@ module "eks" {
   cluster_endpoint_private_access = false
 
   eks_managed_node_groups = {
-    default = {
+  default = {
       instance_types = ["t3.small"]
       desired_size   = 1
       min_size       = 1
-      max_size       = 3
+      max_size       = 2
+
+      ami_type = "AL2023_x86_64_STANDARD"
     }
   }
 }
