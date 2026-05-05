@@ -1,43 +1,93 @@
-# ReWear – Community Clothing Exchange Platform
+<div align="center">
 
-ReWear is a web-based platform designed to promote sustainable fashion by enabling users to exchange unused clothing through direct swaps or a point-based redemption system. The system connects users within communities and provides a digital wardrobe sharing experience.
+# 🧥 ReWear
+
+### Full Stack Web Application with End-to-End DevOps Pipeline
+
+[![React](https://img.shields.io/badge/React-Vite-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://vitejs.dev/)
+[![Flask](https://img.shields.io/badge/Flask-Python-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Docker](https://img.shields.io/badge/Docker-Container-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-EKS-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-D24939?style=for-the-badge&logo=jenkins&logoColor=white)](https://www.jenkins.io/)
+[![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
+
+**Atharva Deokar (2023300042) · Saur Deshmukh (2023300045)**
+
+
+</div>
+
+---
+
+## 🌐 About the Project
+
+**ReWear** is a cloud-native, full-stack web platform that allows users to browse, list, and exchange clothing items. Built with modern technologies and deployed on AWS, it demonstrates a complete production-grade DevOps lifecycle, from a developer's local machine to a live, monitored Kubernetes cluster.
+
+**Key Highlights:**
+- 🚀 Fully automated CI/CD from code commit to cloud deployment
+- 🐳 Containerized frontend & backend with Docker
+- ☸️ Orchestrated on AWS EKS (Elastic Kubernetes Service)
+- 📊 Real-time monitoring with Prometheus & Grafana
+- 🏗️ Infrastructure provisioned entirely via Terraform
 
 ---
 
-## 🧩 Problem Statement
+## 🏗️ Architecture Diagram
 
-Every year, millions of tons of clothing are discarded, contributing to growing environmental problems and textile waste. Most of these garments are still wearable but end up in landfills due to a lack of accessible reuse or exchange platforms.
+> The diagram below illustrates the complete DevOps pipeline, from developer workstation to end-user access.
 
-People often have clothes that no longer fit, match their style, or are simply unused — but these items can have great value for someone else. However, there's no simple, community-driven platform to enable meaningful, responsible exchanges of such clothing.
-
-ReWear solves this problem by allowing people to list, browse, and exchange clothes sustainably — encouraging circular fashion and reducing environmental footprint.
+![ReWear Architecture Diagram](docs/architecture.png)
 
 ---
 
-## 🌟 Key Features
+## 🛠️ Tech Stack
 
-* 🔐 User Authentication via Firebase
-* 👤 User Dashboard with Profile, Points, and Uploaded Items
-* 🛍️ Add Item with full details: title, brand, category, size, type, etc.
-* 🪙 Points-based redemption system and swap requests
-
-* 🛠️ Admin dashboard to approve items
-* 📦 Browse available clothes with filters
-* 📅 Tracks upload date (month/year)
-
----
-## 🏗 Tech Stack
-
-| Layer    | Technology                           |
-| -------- | ------------------------------------ |
-| Frontend | React.js, Tailwind CSS |
-| Backend  | Flask (Python), REST API             |
-| Database | MongoDB Atlas                        |
-| Storage  | Firebase Storage / Cloudinary        |
-| Auth     | Firebase Authentication              |
+| Layer | Technology |
+|---|---|
+| **Frontend** | React (Vite), Tailwind CSS |
+| **Backend** | Flask (Python), REST APIs |
+| **Database** | MongoDB |
+| **Containerization** | Docker, Docker Compose |
+| **Orchestration** | Kubernetes (AWS EKS) |
+| **CI/CD** | Jenkins |
+| **Code Quality** | SonarQube |
+| **Infrastructure as Code** | Terraform |
+| **Monitoring** | Prometheus, Grafana |
+| **Cloud** | AWS (EKS, EC2, Load Balancer) |
 
 ---
-## 👥 Team Members
-* Saur Deshmukh – 2023300045
-* Atharva Deokar – 2023300042
 
+## 📄 Key Configuration Files
+
+| File | Purpose |
+|---|---|
+| `Jenkinsfile` | Defines the full CI/CD pipeline stages |
+| `docker-compose.yml` | Local multi-container development setup |
+| `k8s/*.yaml` | Kubernetes deployment, service & secret manifests |
+| `terraform/main.tf` | AWS EKS cluster and VPC provisioning |
+| `sonar-project.properties` | SonarQube project configuration |
+| `monitoring/prometheus-config.yaml` | Prometheus scrape configuration |
+
+---
+
+## 📸 Screenshots
+
+| View | Screenshot |
+|---|---|
+| Homepage | ![Homepage](docs/screenshots/home.jpeg) |
+| Dashboard | ![Dashboard](docs/screenshots/dashboard.jpeg) |
+| Add Item Form | ![Add Item Form](docs/screenshots/list.jpeg) |
+| Jenkins Pipeline | ![Jenkins Pipeline](docs/screenshots/jenkins.png) |
+| Grafana Dashboard | ![Grafana Dashboard](docs/screenshots/grafana.jpeg) |
+
+---
+
+## 👥 Contributors
+
+| Name | UID |
+|---|---|
+| Atharva Deokar | 2023300042 |
+| Saur Deshmukh | 2023300045 |
+
+---
