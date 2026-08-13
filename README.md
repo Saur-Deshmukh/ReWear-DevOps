@@ -82,12 +82,3 @@
 | Grafana Dashboard | ![Grafana Dashboard](docs/screenshots/grafana.jpeg) |
 
 ---
-
-## 👥 Contributors
-
-| Name | UID |
-|---|---|
-| Atharva Deokar | 2023300042 |
-| Saur Deshmukh | 2023300045 |
-
----
